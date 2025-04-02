@@ -2,5 +2,5 @@
 # Add funds to the address.
 # Return only the Address
 segwit_ADDR=$(bitcoin-cli -regtest getnewaddress -addresstype bech32)
-bitcoin-cli -regtest sendtoaddress $segwit_ADDR 21
+bitcoin-cli -regtest sendtoaddress $segwit_ADDR 21 -fallbackfee
 echo $segwit_ADDR
