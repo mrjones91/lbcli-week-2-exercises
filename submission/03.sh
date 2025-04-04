@@ -5,6 +5,8 @@ funds=$(bitcoin-cli -regtest getnewaddress)
 funding=$(bitcoin-cli -regtest generatetoaddress 200 "$funds")
 bitcoin-cli -regtest gettransaction $(bitcoin-cli -regtest -named sendtoaddress address="$(bitcoin-cli -regtest getnewaddress "" "bech32")" amount=0.00005 fee_rate=20) true | jq -r '.details.[0].address'
 exit 0
+
+# THE TRENCHES
 # funds=$(bitcoin-cli -regtest getnewaddress "" "bech32")
 # bitcoin-cli -regtest generatetoaddress 100 $funds
 
