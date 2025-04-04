@@ -1,8 +1,7 @@
 # Created a SegWit address.
 # Add funds to the address.
 # Return only the Address
-alias bitcoin-cli='bitcoin-cli -regtest'
-bitcoin-cli gettransaction $(bitcoin-cli sendtoaddress $(bitcoin-cli getnewaddress "" "bech32") 0.00005) true | jq -r '.details.[0].address'
+bitcoin-cli -regtest gettransaction $(bitcoin-cli -regtest sendtoaddress $(bitcoin-cli -regtest getnewaddress "" "bech32") 0.00005) true | jq -r '.details.[0].address'
 exit 0
 # funds=$(bitcoin-cli -regtest getnewaddress "" "bech32")
 # bitcoin-cli -regtest generatetoaddress 100 $funds
