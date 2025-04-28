@@ -49,17 +49,17 @@ echo ""
 
 # STUDENT TASK: Decode the transaction to get the TXID
 # WRITE YOUR SOLUTION BELOW:
-TXID=$(bitcoin-cli -regtestdecoderawtransaction $BASE_TX | jq -r '.txid')
+TXID=$(bitcoin-cli -regtest decoderawtransaction $BASE_TX | jq -r '.txid')
 check_cmd "Transaction decoding" "TXID" "$TXID"
 
 echo "Transaction ID: $TXID"
 
 # STUDENT TASK: Extract the number of inputs and outputs from the transaction
 # WRITE YOUR SOLUTION BELOW:
-NUM_INPUTS=$(bitcoin-cli -regtestdecoderawtransaction $BASE_TX | jq -r '.vin | length')
+NUM_INPUTS=$(bitcoin-cli -regtest decoderawtransaction $BASE_TX | jq -r '.vin | length')
 check_cmd "Input counting" "NUM_INPUTS" "$NUM_INPUTS"
 
-NUM_OUTPUTS=$(bitcoin-cli -regtestdecoderawtransaction $BASE_TX | jq -r '.vout | length')
+NUM_OUTPUTS=$(bitcoin-cli -regtest decoderawtransaction $BASE_TX | jq -r '.vout | length')
 check_cmd "Output counting" "NUM_OUTPUTS" "$NUM_OUTPUTS"
 
 echo "Number of inputs: $NUM_INPUTS"
@@ -67,7 +67,7 @@ echo "Number of outputs: $NUM_OUTPUTS"
 
 # STUDENT TASK: Extract the value of the first output in satoshis
 # WRITE YOUR SOLUTION BELOW:
-FIRST_OUTPUT_VALUE=$(bitcoin-cli -regtestdecoderawtransaction $BASE_TX | jq -r '.vout[0].value')
+FIRST_OUTPUT_VALUE=$(bitcoin-cli -regtest decoderawtransaction $BASE_TX | jq -r '.vout[0].value')
 check_cmd "Output value extraction" "FIRST_OUTPUT_VALUE" "$FIRST_OUTPUT_VALUE"
 
 echo "First output value: $FIRST_OUTPUT_VALUE satoshis"
@@ -193,7 +193,7 @@ check_cmd "Output JSON creation" "TX_OUTPUTS" "$TX_OUTPUTS"
 echo "change address: $CHANGE_ADDRESS"
 
 # STUDENT TASK: Create the raw transaction
-RAW_TX=$(bitcoin-cli -regtest-named createrawtransaction inputs="$TX_INPUTS" outputs="$TX_OUTPUTS")
+RAW_TX=$(bitcoin-cli -regtest -named createrawtransaction inputs="$TX_INPUTS" outputs="$TX_OUTPUTS")
 check_cmd "Raw transaction creation" "RAW_TX" "$RAW_TX"
 
 echo "Successfully created raw transaction!"
@@ -211,7 +211,7 @@ echo ""
 
 # STUDENT TASK: Decode the raw transaction
 # WRITE YOUR SOLUTION BELOW:
-DECODED_TX=$(bitcoin-cli -regtestdecoderawtransaction $RAW_TX | jq)
+DECODED_TX=$(bitcoin-cli -regtest decoderawtransaction $RAW_TX | jq)
 check_cmd "Transaction decoding" "DECODED_TX" "$DECODED_TX"
 
 # STUDENT TASK: Extract and verify the key components from the decoded transaction
